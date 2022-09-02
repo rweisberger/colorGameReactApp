@@ -6,24 +6,27 @@ function App() {
   const [value, setValue] = useState(0);
 
   const [boxes, setBoxes] = useState([
-                              {number: 1, isActive: false },
-                              {number: 2, isActive: false },
-                              {number: 3, isActive: false },
-                              {number: 4, isActive: false },
-                              {number: 5, isActive: false },
-                              {number: 6, isActive: false },
-                              {number: 7, isActive: false },
-                              {number: 8, isActive: false },
-                              {number: 9, isActive: false }
+                              {number: 1, isActive: false, color: null },
+                              {number: 2, isActive: false, color: null },
+                              {number: 3, isActive: false, color: null },
+                              {number: 4, isActive: false, color: null },
+                              {number: 5, isActive: false, color: null },
+                              {number: 6, isActive: false, color: null },
+                              {number: 7, isActive: false, color: null },
+                              {number: 8, isActive: false, color: null },
+                              {number: 9, isActive: false, color: null }
                             ]);
-
+  function randomRGB(){ 
+      var r = Math.floor(255*(Math.random()));
+      var g = Math.floor(255*(Math.random()));
+      var b = Math.floor(255*(Math.random()));        
+      return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+    }
 
   const changeColor = () => {
-    console.log(value);
     let selectedBox = boxes.find((box)=> box.number == value )
     selectedBox.isActive = !selectedBox.isActive;
-    console.log(selectedBox);
-    console.log(boxes)
+    selectedBox.color = randomRGB()
     setBoxes([...boxes]);
   }
 
@@ -37,7 +40,9 @@ function App() {
         </div>
         <div className='game-board'> 
           {boxes.map((element, i) => (
-            <div key={i} className= {element.isActive ? 'grid-box2' : 'grid-box1'}>{element.number}</div>
+            // <div key={i} className= {element.isActive ? 'grid-box2' : 'grid-box1'}>{element.number}</div>
+            <div key={i} className="grid-box1" style = {{background: element.isActive ? element.color : 'white'}}>{element.number}</div>
+
           ))}
         </div>
       </div> 
